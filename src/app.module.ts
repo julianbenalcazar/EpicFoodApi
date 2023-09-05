@@ -9,6 +9,7 @@ import { OrderstatusModule } from './orderstatus/orderstatus.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { DetailModule } from './detail/detail.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       port: 5432, // Puerto predeterminado de PostgreSQL
       username: 'postgres',
       password: '',
-      database: 'epic_food',
+      database: 'epic_foodv1',
       autoLoadEntities: true,
       migrations: ['src/migrations/*.js'],
       synchronize: true,
@@ -35,6 +36,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     OrderstatusModule,
     ReviewsModule,
     DetailModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

@@ -1,37 +1,54 @@
-import { IsArray, IsEmail, IsInt, IsOptional, IsString } from "class-validator";
+import { Transform } from 'class-transformer';
+import {
+  IsArray,
+  IsEmail,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateUserDto {
+  @Transform(({ value }) => value.trim())
+  @IsString()
+  @MinLength(3)
+  name: string;
 
-    @IsString()
-    name: string;
+  @Transform(({ value }) => value.trim())
+  @IsString()
+  @MinLength(3)
+  lastname: string;
 
-    @IsString()
-    lastname: string;
+  @Transform(({ value }) => value.trim())
+  @IsString()
+  image: string;
 
-    @IsString()
-    image: string;
+  @Transform(({ value }) => value.trim())
+  @IsString()
+  @MinLength(10)
+  identification: string;
 
-    @IsString()
-    identification: string;
+  @Transform(({ value }) => value.trim())
+  @IsString()
+  @MinLength(10)
+  phone: string;
 
-    @IsString()
-    phone: string;
+  @IsString()
+  @IsEmail()
+  email: string;
 
-    @IsString()
-    @IsEmail()
-    email: string;
+  @Transform(({ value }) => value.trim())
+  @IsString()
+  @MinLength(8)
+  password: string;
 
-    @IsString()
-    password: string;
+  @IsArray()
+  address: string[];
 
-    @IsArray()
-    address: string[];
+  @IsString()
+  @IsOptional()
+  status?: string;
 
-    @IsString()
-    @IsOptional()
-    status?: string;
-
-    @IsString()
-    @IsOptional()
-    role?: string;
+  @IsString()
+  @IsOptional()
+  role?: string;
 }

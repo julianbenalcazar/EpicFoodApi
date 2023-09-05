@@ -25,10 +25,10 @@ export class User {
     @Column({length: 10, unique: true})
     phone: string;
 
-    @Column({length: 50, unique: true})
+    @Column({length: 100, unique: true})
     email: string;
 
-    @Column({length: 50})
+    @Column({length: 100})
     password: string;
 
     @Column('text', { array: true, transformer: new Array() })

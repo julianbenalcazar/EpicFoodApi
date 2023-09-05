@@ -1,13 +1,11 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+
+import * as bcryptjs from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
@@ -17,19 +15,21 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
+    const { password } = createUserDto;
     const user = await this.findOneByEmail(createUserDto.email);
     try {
       if (!user) {
-        const newUser = this.userRepository.create(createUserDto);
         const usu = await this.findOneByPhone(createUserDto.phone);
         if (usu) {
           throw new HttpException(
             'Numero de telefono ya existe',
             HttpStatus.BAD_REQUEST,
           );
-        } else {
-          return this.userRepository.save(newUser);
         }
+        const passwordHash = await bcryptjs.hash(password, 10);
+        createUserDto.password = passwordHash;
+        const newUser = this.userRepository.create(createUserDto);
+        return this.userRepository.save(newUser);
       }
 
       if (user && user.identification === createUserDto.identification) {
@@ -57,9 +57,8 @@ export class UsersService {
   async findAll() {
     try {
       return await this.userRepository.find({
-        relations: ['restaurant', 'deliveries', 'reviews']
-      })
-        
+        relations: ['restaurant', 'deliveries', 'reviews'],
+      });
     } catch (error) {
       throw new HttpException(
         `Error al optener usuarios. ${error.message}`,
@@ -80,11 +79,7 @@ export class UsersService {
       if (user) {
         return user;
       }
-      throw new HttpException(
-        'Este usuario no existe',
-        HttpStatus.BAD_REQUEST,
-      );
-      
+      throw new HttpException('Este usuario no existe', HttpStatus.BAD_REQUEST);
     } catch (error) {
       throw new HttpException(
         `Error al optener usuario por id. ${error.message}`,
@@ -136,13 +131,13 @@ export class UsersService {
   async remove(id: number) {
     try {
       const user = await this.findOne(id);
-      if(user && user.restaurant != null){
+      if (user && user.restaurant != null) {
         throw new HttpException(
           'No se puede eliminar este usuario ya que tiene una franquicia registrada.',
           HttpStatus.BAD_REQUEST,
         );
       }
-      if(user && user.deliveries != null){
+      if (user && user.deliveries != null) {
         throw new HttpException(
           'No se puede eliminar este usuario ya que tiene repartidores activos.',
           HttpStatus.BAD_REQUEST,
