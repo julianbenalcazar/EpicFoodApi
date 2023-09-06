@@ -1,3 +1,4 @@
+import { Role } from '@app/common/enums/role.enum';
 import { Transform } from 'class-transformer';
 import {
   IsArray,
@@ -50,5 +51,5 @@ export class CreateUserDto {
 
   @IsString()
   @IsOptional()
-  role?: string;
+  role?: Role;
 }

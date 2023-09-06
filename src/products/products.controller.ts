@@ -1,8 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Auth } from '@app/auth/decorators/auth.decorator';
+import { Role } from '@app/common/enums/role.enum';
 
+@Auth(Role.USER)
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}

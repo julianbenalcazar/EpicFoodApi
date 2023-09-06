@@ -20,8 +20,14 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
-    // Devuelve true o false dependiendo el rol del usuario enviado en el token.
     const { user } = context.switchToHttp().getRequest();
+    
+    // Si es admin tiene todo el acceso.
+    if (user.role === Role.ADMIN) {
+      return true;
+    }
+    
+    // Devuelve true o false dependiendo el rol del usuario enviado en el token.
     return role === user.role;
   }
 }

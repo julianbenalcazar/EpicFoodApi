@@ -48,7 +48,7 @@ export class User {
   status: string;
 
   @Column({ type: 'enum', default: Role.USER, enum: Role })
-  role: string;
+  role: Role;
 
   @DeleteDateColumn()
   deletedAt: Date;

@@ -15,10 +15,10 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '@app/auth/guard/auth.guard';
 import { Req } from '@nestjs/common';
 import { RequestWithUser } from '@app/auth/interface/request-with-user.interface';
-import { RolesGuard } from '@app/auth/guard/roles.guard';
-import { Roles } from '@app/auth/decorators/roles.decorator';
 import { Role } from '@app/common/enums/role.enum';
+import { Auth } from '@app/auth/decorators/auth.decorator';
 
+@Auth(Role.USER)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -29,8 +29,7 @@ export class UsersController {
   }
 
   @Get()
-  @Roles(Role.ADMIN) // Decorador personalizado para protejer la ruta dependiendo el role de usuario.
-  @UseGuards(AuthGuard, RolesGuard)
+  @Auth(Role.ADMIN)
   findAll(@Req() req: RequestWithUser) {
     return this.usersService.findAll();
   }

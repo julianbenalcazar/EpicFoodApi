@@ -1,8 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { OrderstatusService } from './orderstatus.service';
 import { CreateOrderstatusDto } from './dto/create-orderstatus.dto';
 import { UpdateOrderstatusDto } from './dto/update-orderstatus.dto';
+import { Auth } from '@app/auth/decorators/auth.decorator';
+import { Role } from '@app/common/enums/role.enum';
 
+@Auth(Role.USER)
 @Controller('orderstatus')
 export class OrderstatusController {
   constructor(private readonly orderstatusService: OrderstatusService) {}
@@ -23,7 +34,10 @@ export class OrderstatusController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOrderstatusDto: UpdateOrderstatusDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateOrderstatusDto: UpdateOrderstatusDto,
+  ) {
     return this.orderstatusService.update(+id, updateOrderstatusDto);
   }
 

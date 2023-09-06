@@ -7,6 +7,8 @@ import { Roles } from './decorators/roles.decorator';
 import { RolesGuard } from './guard/roles.guard';
 import { Role } from '../common/enums/role.enum';
 import { Auth } from './decorators/auth.decorator';
+import { ActiveUser } from '@app/common/decorators/active-user.decorator';
+import { IUserActive } from '@app/common/interface/user-active.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -32,7 +34,7 @@ export class AuthController {
    */
   @Get('profile')
   @Auth(Role.USER)
-  profile(@Req() req: RequestWithUser) {
-    return this.authService.profile(req.user);
+  profile(@ActiveUser() user: IUserActive) {
+    return this.authService.profile(user);
   }
 }
