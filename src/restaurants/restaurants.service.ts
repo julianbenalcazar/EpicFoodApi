@@ -4,7 +4,7 @@ import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Restaurant } from './entities/restaurant.entity';
 import { Repository } from 'typeorm';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '@app/users/users.service';
 
 @Injectable()
 export class RestaurantsService {

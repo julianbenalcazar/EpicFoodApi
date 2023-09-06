@@ -3,10 +3,10 @@ import { CategoriesService } from './categories.service';
 import { CategoriesController } from './categories.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Category } from './entities/category.entity';
-import { RestaurantsModule } from 'src/restaurants/restaurants.module';
-import { RestaurantsService } from 'src/restaurants/restaurants.service';
-import { UsersModule } from 'src/users/users.module';
-import { UsersService } from 'src/users/users.service';
+import { RestaurantsModule } from '@app/restaurants/restaurants.module';
+import { RestaurantsService } from '@app/restaurants/restaurants.service';
+import { UsersModule } from '@app/users/users.module';
+import { UsersService } from '@app/users/users.service';
 
 @Module({
   imports: [

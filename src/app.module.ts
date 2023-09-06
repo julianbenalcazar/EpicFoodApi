@@ -21,7 +21,7 @@ import { AuthModule } from './auth/auth.module';
       password: '',
       database: 'epic_foodv1',
       autoLoadEntities: true,
-      migrations: ['src/migrations/*.js'],
+      migrations: ['@app/migrations/*.js'],
       synchronize: true,
       extra: {
         array: true,

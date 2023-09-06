@@ -1,8 +1,8 @@
-import { Delivery } from 'src/deliveries/entities/delivery.entity';
-import { Detail } from 'src/detail/entities/detail.entity';
-import { Orderstatus } from 'src/orderstatus/entities/orderstatus.entity';
-import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
-import { User } from 'src/users/entities/user.entity';
+import { Delivery } from '@app/deliveries/entities/delivery.entity';
+import { Detail } from '@app/detail/entities/detail.entity';
+import { Orderstatus } from '@app/orderstatus/entities/orderstatus.entity';
+import { Restaurant } from '@app/restaurants/entities/restaurant.entity';
+import { User } from '@app/users/entities/user.entity';
 import {
   Column,
   DeleteDateColumn,

@@ -12,12 +12,12 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthGuard } from 'src/auth/guard/auth.guard';
+import { AuthGuard } from '@app/auth/guard/auth.guard';
 import { Req } from '@nestjs/common';
-import { RequestWithUser } from 'src/auth/interface/request-with-user.interface';
-import { RolesGuard } from 'src/auth/guard/roles.guard';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { Role } from 'src/auth/enums/role.enum';
+import { RequestWithUser } from '@app/auth/interface/request-with-user.interface';
+import { RolesGuard } from '@app/auth/guard/roles.guard';
+import { Roles } from '@app/auth/decorators/roles.decorator';
+import { Role } from '@app/common/enums/role.enum';
 
 @Controller('users')
 export class UsersController {

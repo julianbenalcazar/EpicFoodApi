@@ -4,12 +4,12 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '@app/users/users.service';
 import { LoginDto } from './dto/login.dto';
 
 import * as bcryptjs from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '@app/users/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +19,7 @@ export class AuthService {
   ) {}
 
   async login(loginDto: LoginDto) {
-    const user = await this.userService.findOneByEmail(loginDto.email);
+    const user = await this.userService.findByEmailWithPassword(loginDto.email);
     try {
       if (!user) {
         throw new UnauthorizedException('Usuario o password incorrecto.');
@@ -38,7 +38,6 @@ export class AuthService {
               'Lo sentimos, por su seguridad esta cuenta ha sido deshabilitada.',
             );
           }
-
           const userUpdate = new User();
           userUpdate.attempts = user.attempts + 1;
           await this.userService.update(user.id, userUpdate);

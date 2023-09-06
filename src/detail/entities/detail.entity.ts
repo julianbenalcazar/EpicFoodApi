@@ -1,5 +1,5 @@
-import { Order } from 'src/orders/entities/order.entity';
-import { Product } from 'src/products/entities/product.entity';
+import { Order } from '@app/orders/entities/order.entity';
+import { Product } from '@app/products/entities/product.entity';
 import { Column, DeleteDateColumn, Entity, ManyToOne } from 'typeorm';
 
 @Entity()

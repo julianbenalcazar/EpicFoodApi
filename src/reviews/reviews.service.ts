@@ -9,9 +9,9 @@ import { UpdateReviewDto } from './dto/update-review.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Review } from './entities/review.entity';
 import { Repository } from 'typeorm';
-import { UsersService } from 'src/users/users.service';
-import { RestaurantsService } from 'src/restaurants/restaurants.service';
-import { UpdateRestaurantDto } from 'src/restaurants/dto/update-restaurant.dto';
+import { UsersService } from '@app/users/users.service';
+import { RestaurantsService } from '@app/restaurants/restaurants.service';
+import { UpdateRestaurantDto } from '@app/restaurants/dto/update-restaurant.dto';
 
 @Injectable()
 export class ReviewsService {

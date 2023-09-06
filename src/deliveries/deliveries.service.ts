@@ -4,7 +4,7 @@ import { UpdateDeliveryDto } from './dto/update-delivery.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Delivery } from './entities/delivery.entity';
 import { Repository } from 'typeorm';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '@app/users/users.service';
 
 @Injectable()
 export class DeliveriesService {

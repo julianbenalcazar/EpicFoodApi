@@ -4,10 +4,10 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from './entities/order.entity';
 import { Repository } from 'typeorm';
-import { UsersService } from 'src/users/users.service';
-import { RestaurantsService } from 'src/restaurants/restaurants.service';
-import { DeliveriesService } from 'src/deliveries/deliveries.service';
-import { OrderstatusService } from 'src/orderstatus/orderstatus.service';
+import { UsersService } from '@app/users/users.service';
+import { RestaurantsService } from '@app/restaurants/restaurants.service';
+import { DeliveriesService } from '@app/deliveries/deliveries.service';
+import { OrderstatusService } from '@app/orderstatus/orderstatus.service';
 
 @Injectable()
 export class OrdersService {

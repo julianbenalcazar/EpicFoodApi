@@ -1,3 +1,4 @@
+import { Role } from "src/common/enums/role.enum";
 import { Delivery } from "src/deliveries/entities/delivery.entity";
 import { Order } from "src/orders/entities/order.entity";
 import { Restaurant } from "src/restaurants/entities/restaurant.entity";
@@ -28,7 +29,7 @@ export class User {
     @Column({length: 100, unique: true})
     email: string;
 
-    @Column({length: 100})
+    @Column({length: 100, select: false})
     password: string;
 
     @Column('text', { array: true, transformer: new Array() })
@@ -40,7 +41,7 @@ export class User {
     @Column({length: 2, default: 'A'})
     status: string;
 
-    @Column({default: 'user'})
+    @Column({default: 'user', enum: Role})
     role: string;
 
     @DeleteDateColumn()

@@ -99,6 +99,20 @@ export class UsersService {
     }
   }
 
+  async findByEmailWithPassword(email: string) {
+    try {
+      return await this.userRepository.findOne({ 
+        where: {email},
+        select: ['id', 'name', 'lastname', 'email', 'password', 'role', 'status'],
+       });
+    } catch (error) {
+      throw new HttpException(
+        `Error al optener usuario por email. ${error.message}`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   async findOneByPhone(phone: string) {
     try {
       return await this.userRepository.findOneBy({ phone });

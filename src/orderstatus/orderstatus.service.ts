@@ -4,7 +4,7 @@ import { UpdateOrderstatusDto } from './dto/update-orderstatus.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Orderstatus } from './entities/orderstatus.entity';
 import { Repository } from 'typeorm';
-import { OrdersService } from 'src/orders/orders.service';
+import { OrdersService } from '@app/orders/orders.service';
 
 @Injectable()
 export class OrderstatusService {

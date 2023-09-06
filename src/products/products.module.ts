@@ -3,12 +3,12 @@ import { ProductsService } from './products.service';
 import { ProductsController } from './products.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
-import { CategoriesModule } from 'src/categories/categories.module';
-import { CategoriesService } from 'src/categories/categories.service';
-import { RestaurantsModule } from 'src/restaurants/restaurants.module';
-import { RestaurantsService } from 'src/restaurants/restaurants.service';
-import { UsersModule } from 'src/users/users.module';
-import { UsersService } from 'src/users/users.service';
+import { CategoriesModule } from '@app/categories/categories.module';
+import { CategoriesService } from '@app/categories/categories.service';
+import { RestaurantsModule } from '@app/restaurants/restaurants.module';
+import { RestaurantsService } from '@app/restaurants/restaurants.service';
+import { UsersModule } from '@app/users/users.module';
+import { UsersService } from '@app/users/users.service';
 
 @Module({
   imports: [

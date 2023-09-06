@@ -3,20 +3,20 @@ import { DetailService } from './detail.service';
 import { DetailController } from './detail.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Detail } from './entities/detail.entity';
-import { ProductsService } from 'src/products/products.service';
-import { OrdersService } from 'src/orders/orders.service';
-import { CategoriesService } from 'src/categories/categories.service';
-import { ProductsModule } from 'src/products/products.module';
-import { OrdersModule } from 'src/orders/orders.module';
-import { CategoriesModule } from 'src/categories/categories.module';
-import { UsersModule } from 'src/users/users.module';
-import { UsersService } from 'src/users/users.service';
-import { RestaurantsModule } from 'src/restaurants/restaurants.module';
-import { RestaurantsService } from 'src/restaurants/restaurants.service';
-import { DeliveriesModule } from 'src/deliveries/deliveries.module';
-import { DeliveriesService } from 'src/deliveries/deliveries.service';
-import { OrderstatusService } from 'src/orderstatus/orderstatus.service';
-import { OrderstatusModule } from 'src/orderstatus/orderstatus.module';
+import { ProductsService } from '@app/products/products.service';
+import { OrdersService } from '@app/orders/orders.service';
+import { CategoriesService } from '@app/categories/categories.service';
+import { ProductsModule } from '@app/products/products.module';
+import { OrdersModule } from '@app/orders/orders.module';
+import { CategoriesModule } from '@app/categories/categories.module';
+import { UsersModule } from '@app/users/users.module';
+import { UsersService } from '@app/users/users.service';
+import { RestaurantsModule } from '@app/restaurants/restaurants.module';
+import { RestaurantsService } from '@app/restaurants/restaurants.service';
+import { DeliveriesModule } from '@app/deliveries/deliveries.module';
+import { DeliveriesService } from '@app/deliveries/deliveries.service';
+import { OrderstatusService } from '@app/orderstatus/orderstatus.service';
+import { OrderstatusModule } from '@app/orderstatus/orderstatus.module';
 
 @Module({
   imports: [

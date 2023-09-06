@@ -3,14 +3,14 @@ import { OrderstatusService } from './orderstatus.service';
 import { OrderstatusController } from './orderstatus.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Orderstatus } from './entities/orderstatus.entity';
-import { OrdersService } from 'src/orders/orders.service';
-import { OrdersModule } from 'src/orders/orders.module';
-import { RestaurantsService } from 'src/restaurants/restaurants.service';
-import { DeliveriesService } from 'src/deliveries/deliveries.service';
-import { UsersService } from 'src/users/users.service';
-import { RestaurantsModule } from 'src/restaurants/restaurants.module';
-import { DeliveriesModule } from 'src/deliveries/deliveries.module';
-import { UsersModule } from 'src/users/users.module';
+import { OrdersService } from '@app/orders/orders.service';
+import { OrdersModule } from '@app/orders/orders.module';
+import { RestaurantsService } from '@app/restaurants/restaurants.service';
+import { DeliveriesService } from '@app/deliveries/deliveries.service';
+import { UsersService } from '@app/users/users.service';
+import { RestaurantsModule } from '@app/restaurants/restaurants.module';
+import { DeliveriesModule } from '@app/deliveries/deliveries.module';
+import { UsersModule } from '@app/users/users.module';
 
 @Module({
   imports: [
