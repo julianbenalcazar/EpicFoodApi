@@ -7,12 +7,17 @@ import {
   Param,
   Delete,
   Query,
-  UseGuards, 
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
+import { Req } from '@nestjs/common';
+import { RequestWithUser } from 'src/auth/interface/request-with-user.interface';
+import { RolesGuard } from 'src/auth/guard/roles.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from 'src/auth/enums/role.enum';
 
 @Controller('users')
 export class UsersController {
@@ -24,8 +29,9 @@ export class UsersController {
   }
 
   @Get()
-  @UseGuards(AuthGuard)
-  findAll() {
+  @Roles(Role.ADMIN) // Decorador personalizado para protejer la ruta dependiendo el role de usuario.
+  @UseGuards(AuthGuard, RolesGuard)
+  findAll(@Req() req: RequestWithUser) {
     return this.usersService.findAll();
   }
 
