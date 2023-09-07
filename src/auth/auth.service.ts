@@ -45,7 +45,13 @@ export class AuthService {
         }
         //Si usuario y password es correcto retornamos el token de acceso.
         const { email } = loginDto;
-        const payload = { email: user.email, role: user.role };
+        const payload = {
+          email: user.email,
+          role: user.role,
+          id: user.id,
+          restaurantId: user.restaurant.id,
+          deliveries: user.deliveries.map((del) => del.id),
+        };
         const token = await this.jwtService.signAsync(payload);
         return {
           token,
@@ -65,7 +71,6 @@ export class AuthService {
   }
 
   async profile({ email, role }: { email: string; role: string }) {
-    
     return await this.userService.findOneByEmail(email);
   }
 }

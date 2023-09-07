@@ -1,4 +1,7 @@
 export interface IUserActive {
-    email: string;
-    role: string;
+  email: string;
+  role: string;
+  id: number;
+  restaurantId: number;
+  deliveries: [];
 }

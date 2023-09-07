@@ -12,17 +12,19 @@ import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Auth } from '@app/auth/decorators/auth.decorator';
 import { Role } from '@app/common/enums/role.enum';
+import { ActiveUser } from '@app/common/decorators/active-user.decorator';
+import { IUserActive } from '@app/common/interface/user-active.interface';
 
 @Auth(Role.USER)
 @Controller('restaurants')
 export class RestaurantsController {
   constructor(private readonly restaurantsService: RestaurantsService) {}
 
+  @Auth(Role.USER)
   @Post()
-  create(@Body() createRestaurantDto: CreateRestaurantDto) {
+  create(@Body() createRestaurantDto: CreateRestaurantDto, @ActiveUser() user: IUserActive) {
     // Obtencion del usuario logueado.
-    const user = 1;
-    return this.restaurantsService.create(createRestaurantDto);
+    return this.restaurantsService.create(createRestaurantDto, user);
   }
 
   @Get()

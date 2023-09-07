@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Restaurant } from './entities/restaurant.entity';
 import { Repository } from 'typeorm';
 import { UsersService } from '@app/users/users.service';
+import { IUserActive } from '@app/common/interface/user-active.interface';
 
 @Injectable()
 export class RestaurantsService {
@@ -14,8 +15,8 @@ export class RestaurantsService {
     private userService: UsersService,
   ) {}
 
-  async create(createRestaurantDto: CreateRestaurantDto) {
-    const { userId, name } = createRestaurantDto;
+  async create(createRestaurantDto: CreateRestaurantDto, user: IUserActive) {
+    const { name } = createRestaurantDto;
     const restaurantDb = await this.findOneByName(name);
     try {
       if (restaurantDb) {
@@ -24,7 +25,7 @@ export class RestaurantsService {
           HttpStatus.BAD_REQUEST,
         );
       }
-      const userLogued = await this.userService.findOne(userId);
+      const userLogued = await this.userService.findOne(user.id);
       if (userLogued && userLogued.restaurant == null) {
         const restaurant = new Restaurant();
         restaurant.owner = userLogued;
@@ -39,7 +40,7 @@ export class RestaurantsService {
 
         const userRestaurant = new UpdateRestaurantDto();
         userRestaurant.restaurant = newRestaurant.id;
-        await this.userService.update(userId, userRestaurant);
+        await this.userService.update(user.id, userRestaurant);
         return newRestaurant;
       }
       throw new HttpException(
@@ -97,10 +98,6 @@ export class RestaurantsService {
       if (restaurant) {
         return restaurant;
       }
-      throw new HttpException(
-        'Este restaurante no esta registrado.',
-        HttpStatus.BAD_REQUEST,
-      );
     } catch (error) {
       console.log(error);
       throw new HttpException(

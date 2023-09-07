@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from './entities/category.entity';
 import { Repository } from 'typeorm';
 import { RestaurantsService } from '@app/restaurants/restaurants.service';
+import { IUserActive } from '@app/common/interface/user-active.interface';
 
 @Injectable()
 export class CategoriesService {
@@ -13,9 +14,21 @@ export class CategoriesService {
     private readonly categoryRepository: Repository<Category>,
     private readonly restaurantService: RestaurantsService,
   ) {}
-  async create(createCategoryDto: CreateCategoryDto) {
-    const { restaurantId, name } = createCategoryDto;
-    const restaurant = await this.restaurantService.findOne(restaurantId);
+  /**
+   * Metodo para crear una categoria. user es el usuario autenticado.
+   * @param createCategoryDto 
+   * @param user 
+   * @returns 
+   */
+  async create(createCategoryDto: CreateCategoryDto, user: IUserActive) {
+    const { name } = createCategoryDto;
+    if (!user.restaurantId) {
+      throw new HttpException(
+        `El restaurante no existe.`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const restaurant = await this.restaurantService.findOne(user.restaurantId);
     const category = await this.findOneByName(name);
     try {
       if (category) {
@@ -39,6 +52,9 @@ export class CategoriesService {
     }
   }
 
+  /**
+   * @returns retorna todas las categorias de un restaurante.
+   */
   async findAll() {
     try {
       return await this.categoryRepository.find({
@@ -52,6 +68,11 @@ export class CategoriesService {
     }
   }
 
+  /**
+   * Metodo para buscar una categoria por id.
+   * @param id 
+   * @returns retorna un objeto con row affected 1.
+   */
   async findOne(id: number) {
     try {
       const category = await this.categoryRepository
@@ -75,6 +96,11 @@ export class CategoriesService {
     }
   }
 
+  /**
+   * Metodo para buscar una categoria por un nombre en especifico.
+   * @param name 
+   * @returns retorna una categoria.
+   */
   async findOneByName(name: string) {
     try {
       const category = await this.categoryRepository.findOneBy({ name });
@@ -89,6 +115,12 @@ export class CategoriesService {
     }
   }
 
+  /**
+   * Metodo para actualizar la categoria.
+   * @param id 
+   * @param updateCategoryDto 
+   * @returns retorna la categoria actualizada.
+   */
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
     try {
       const category = await this.findOne(id);
@@ -107,9 +139,15 @@ export class CategoriesService {
     }
   }
 
+  /**
+   * Metodo para el borrado logico de categorias.
+   * @param id 
+   * @returns 
+   */
   async remove(id: number) {
     try {
       const category = await this.findOne(id);
+      // Verifica si la categoria tiene productos asociados.
       if (category.products.length > 0) {
         throw new HttpException(
           `La categoria ${category.name} tiene productos.`,

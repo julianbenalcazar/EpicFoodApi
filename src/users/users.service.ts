@@ -101,10 +101,19 @@ export class UsersService {
 
   async findByEmailWithPassword(email: string) {
     try {
-      return await this.userRepository.findOne({ 
-        where: {email},
-        select: ['id', 'name', 'lastname', 'email', 'password', 'role', 'status'],
-       });
+      return await this.userRepository.findOne({
+        where: { email },
+        select: [
+          'id',
+          'name',
+          'lastname',
+          'email',
+          'password',
+          'role',
+          'status',
+        ],
+        relations: ['restaurant', 'deliveries']
+      });
     } catch (error) {
       throw new HttpException(
         `Error al optener usuario por email. ${error.message}`,

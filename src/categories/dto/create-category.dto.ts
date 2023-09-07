@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 
 export class CreateCategoryDto {
     @IsString()
@@ -8,8 +8,4 @@ export class CreateCategoryDto {
     @IsString()
     @IsNotEmpty()
     image: string;
-
-    @IsNotEmpty()
-    @IsNumber()
-    restaurantId: number;
 }

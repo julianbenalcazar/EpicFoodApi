@@ -12,13 +12,11 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthGuard } from '@app/auth/guard/auth.guard';
 import { Req } from '@nestjs/common';
 import { RequestWithUser } from '@app/auth/interface/request-with-user.interface';
 import { Role } from '@app/common/enums/role.enum';
 import { Auth } from '@app/auth/decorators/auth.decorator';
 
-@Auth(Role.USER)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -34,21 +32,25 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Auth(Role.USER)
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.usersService.findOne(id);
   }
 
+  @Auth(Role.USER)
   @Get()
   findOneByEmail(@Query('email') email: string) {
     return this.usersService.findOneByEmail(email);
   }
 
+  @Auth(Role.USER)
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
+  @Auth(Role.USER)
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.usersService.remove(id);

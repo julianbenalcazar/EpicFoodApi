@@ -20,8 +20,4 @@ export class CreateRestaurantDto {
 
     @IsString()
     description: string;
-
-    @IsNotEmpty()
-    @IsNumber()
-    userId: number;
 }
