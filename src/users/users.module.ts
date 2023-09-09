@@ -7,6 +7,7 @@ import { DeliveriesModule } from '@app/deliveries/deliveries.module';
 import { DeliveriesService } from '@app/deliveries/deliveries.service';
 import { RestaurantsModule } from '@app/restaurants/restaurants.module';
 import { RestaurantsService } from '@app/restaurants/restaurants.service';
+import { CloudinaryService } from '@app/cloudinary/cloudinary.service';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { RestaurantsService } from '@app/restaurants/restaurants.service';
     RestaurantsModule,
   ],
   controllers: [UsersController],
-  providers: [UsersService, DeliveriesService, RestaurantsService],
+  providers: [UsersService, DeliveriesService, RestaurantsService, CloudinaryService],
   exports: [TypeOrmModule],
 })
 export class UsersModule {}

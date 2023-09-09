@@ -10,6 +10,8 @@ import { ReviewsModule } from './reviews/reviews.module';
 import { DetailModule } from './detail/detail.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
       extra: {
         array: true,
-      }
+      },
     }),
     UsersModule,
     DeliveriesModule,
@@ -37,6 +39,8 @@ import { AuthModule } from './auth/auth.module';
     ReviewsModule,
     DetailModule,
     AuthModule,
+    CloudinaryModule,
+    ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [],
   providers: [],
